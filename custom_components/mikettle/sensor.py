@@ -9,7 +9,8 @@ from mikettle.mikettle import (
     MI_SET_TEMPERATURE,
     MI_CURRENT_TEMPERATURE,
     MI_KW_TYPE,
-    MI_KW_TIME
+    MI_CURRENT_KW_TIME,
+    MI_SET_KW_TIME,
 )
 import voluptuous as vol
 
@@ -42,7 +43,8 @@ SENSOR_TYPES = {
     MI_SET_TEMPERATURE: ["Set temperature", "°C", "mdi:thermometer-lines"],
     MI_CURRENT_TEMPERATURE: ["Current temperature", "°C", "mdi:thermometer"],
     MI_KW_TYPE: ["Keep warm type", "", "mdi:thermostat"],
-    MI_KW_TIME: ["Keep warm time", "s", "mdi:clock-outline"],
+    MI_CURRENT_KW_TIME: ["Keep warm time", "min", "mdi:clock-outline"],
+    MI_SET_KW_TIME: ["Set keep warm time", "min", "mdi:clock-outline"]
 }
 
 PLATFORM_SCHEMA = PLATFORM_SCHEMA.extend(
@@ -61,7 +63,8 @@ PLATFORM_SCHEMA = PLATFORM_SCHEMA.extend(
 async def async_setup_platform(hass, config, async_add_entities, discovery_info=None):
     """Set up the MiKettle sensor."""
     cache = config.get(CONF_SCAN_INTERVAL, DEFAULT_SCAN_INTERVAL).total_seconds()
-    poller = MiKettle(config.get(CONF_MAC), config.get(CONF_PRODUCT_ID))
+    _LOGGER.debug(f"Creating cache for {cache} seconds")
+    poller = MiKettle(config.get(CONF_MAC), config.get(CONF_PRODUCT_ID), cache_timeout = cache)
 
     force_update = config.get(CONF_FORCE_UPDATE)
 
