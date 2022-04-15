@@ -1,13 +1,13 @@
 {
-  "domain": "mikettle",
-  "name": "Mikettle",
-  "documentation": "https://github.com/drndos/mikettle-ha",
-  "requirements": [
-    "bluepy==1.3.0",
-    "mikettle==0.0.2"
-  ],
-  "dependencies": [],
-  "codeowners": [
-    "@drndos"
-  ]
+      "domain": "mikettle",
+        "name": "Mikettle",
+        "version": "0.0.2",
+          "documentation": "https://github.com/drndos/mikettle-ha",
+            "requirements": [
+    "bluepy==1.3.0"
+                  ],
+                    "dependencies": [],
+                      "codeowners": [
+                              "@drndos"
+                            ]
 }
